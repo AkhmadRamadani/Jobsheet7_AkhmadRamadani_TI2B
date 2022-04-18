@@ -162,4 +162,10 @@ class MahasiswaController extends Controller
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
+
+    public function nilai($Nim)
+    {
+        $Mahasiswa = Mahasiswa::with('kelas')->where('nim', $Nim)->first();
+        return view('mahasiswa.nilai', ['Mahasiswa' => $Mahasiswa]);
+    }
 }
