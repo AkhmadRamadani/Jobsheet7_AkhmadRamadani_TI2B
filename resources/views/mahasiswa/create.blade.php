@@ -31,22 +31,24 @@
                         </div>
                         <div class="form-group">
                             <label for="Kelas">Kelas</label>
-                            <input type="text" name="Kelas" class="form-control" id="Kelas" ariadescribedby="password">
+                            <select name="Kelas" id="Kelas" class="form-control">
+                                @foreach ($kelas as $kls)
+                                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="text" name="Kelas" class="form-control" id="Kelas" ariadescribedby="password"> --}}
                         </div>
                         <div class="form-group">
                             <label for="Jurusan">Jurusan</label>
-                            <input type="text" name="Jurusan" class="form-control" id="Jurusan"
-                                ariadescribedby="Jurusan">
+                            <input type="text" name="Jurusan" class="form-control" id="Jurusan" ariadescribedby="Jurusan">
                         </div>
                         <div class="form-group">
                             <label for="Email">Email</label>
-                            <input type="email" name="Email" class="form-control" id="Email"
-                                ariadescribedby="Email">
+                            <input type="email" name="Email" class="form-control" id="Email" ariadescribedby="Email">
                         </div>
                         <div class="form-group">
                             <label for="Alamat">Alamat</label>
-                            <input type="text" name="Alamat" class="form-control" id="Alamat"
-                                ariadescribedby="Alamat">
+                            <input type="text" name="Alamat" class="form-control" id="Alamat" ariadescribedby="Alamat">
                         </div>
                         <div class="form-group">
                             <label for="Tanggal_lahir">Tanggal Lahir</label>

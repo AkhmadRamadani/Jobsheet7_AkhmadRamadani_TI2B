@@ -26,5 +26,10 @@ class Mahasiswa extends Model
         'Alamat',
         'Tanggal_lahir'
     ];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
     // use HasFactory;
 }
