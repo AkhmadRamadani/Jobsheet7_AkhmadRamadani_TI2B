@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -67,6 +68,11 @@ class MahasiswaController extends Controller
             'Tanggal_lahir' => 'required'
         ]);
 
+        $image_name = "";
+        if ($request->has('foto')) {
+            $image_name = $request->foto->store('images', 'public');
+        }
+
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('Nim');
         $mahasiswa->nama = $request->get('Nama');
@@ -74,6 +80,7 @@ class MahasiswaController extends Controller
         $mahasiswa->email = $request->get('Email');
         $mahasiswa->alamat = $request->get('Alamat');
         $mahasiswa->tanggal_lahir = $request->get('Tanggal_lahir');
+        $mahasiswa->foto = $image_name;
         $mahasiswa->save();
 
         $kelas = new Kelas;
@@ -108,7 +115,7 @@ class MahasiswaController extends Controller
     {
         $Mahasiswa = Mahasiswa::with('kelas')->find($Nim);
         $kelas = Kelas::all();
-        return view('mahasiswa.edit', compact('Mahasiswa','kelas'));
+        return view('mahasiswa.edit', compact('Mahasiswa', 'kelas'));
     }
 
     /**
@@ -167,5 +174,12 @@ class MahasiswaController extends Controller
     {
         $Mahasiswa = Mahasiswa::with('kelas')->where('nim', $Nim)->first();
         return view('mahasiswa.nilai', ['Mahasiswa' => $Mahasiswa]);
+    }
+
+    public function cetak_pdf($Nim)
+    {
+        $Mahasiswa = Mahasiswa::with('kelas')->where('nim', $Nim)->first();
+        $pdf = PDF::loadview('mahasiswa.cetak_pdf', ['Mahasiswa' => $Mahasiswa]);
+        return $pdf->stream();
     }
 }

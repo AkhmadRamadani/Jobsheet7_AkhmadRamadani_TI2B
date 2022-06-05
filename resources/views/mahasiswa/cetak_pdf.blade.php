@@ -1,7 +1,15 @@
-@extends('mahasiswa.layout')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    {{-- @dump($Mahasiswa->matakuliah) --}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Print PDF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
     <div class="container text-center">
         <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
         <h1>KARTU HASIL STUDI (KHS)</h1>
@@ -10,11 +18,6 @@
             <p><b>NIM : </b>{{ $Mahasiswa->nim }}</p>
             <p><b>Kelas : </b>{{ $Mahasiswa->kelas->nama_kelas }}</p>
 
-        </div>
-        <div class="text-right">
-            <div style="margin: 10px 10px 10px 70px;">
-                <a href="{{ route('cetak_pdf',$Mahasiswa->nim) }}" class="btn btn-success">CETAK PDF</a>
-            </div>
         </div>
         <table class="table table-bordered">
             <tr>
@@ -47,4 +50,6 @@
             @endforeach
         </table>
     </div>
-@endsection
+</body>
+
+</html>
